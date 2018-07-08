@@ -356,6 +356,31 @@ def get_context():
        window. it is fine to include platform specific information, but
        at least include title and executable.'''
 
+    # TODO This is hack for speed
+    return {
+        'posn': [814, -1280],
+        'enaB': "AEType('msng')",
+        'ptsz': [2048, 1280],
+        'help': "AEType('msng')",
+        'ects': [],
+        'axds': "AEType('msng')",
+        'titl': 'tmux',
+        'minW': "AEType('msng')",
+        'valL': "AEType('msng')",
+        'maxV': "AEType('msng')",
+        'focu': False,
+        'id': 'iTerm2',
+        'pcls': "AEType('cwin')",
+        'role': 'AXWindow',
+        'rold': 'standard window',
+        'selE': "AEType('msng')",
+        'pnam': 'tmux',
+        'title': 'tmux',
+        'desc': 'standard window',
+        'orie': "AEType('msng')",
+        'sbrl': 'AXStandardWindow'
+    }
+
     window_id, window_title = get_active_window()
     properties = get_window_properties(window_id)
     properties['id'] = window_id

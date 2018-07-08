@@ -73,7 +73,6 @@ def _refresh_server():
 
 def _get_context():
     global _last_context
-    _refresh_server()
     return _last_context
 
 

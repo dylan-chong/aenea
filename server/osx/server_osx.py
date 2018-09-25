@@ -103,7 +103,7 @@ _QUOTED_KEY_TRANSLATION = {
     'colon': ':',
     'comma': ',',
     'dollar': '$',
-    'dot': '.',
+    # 'dot': '.',  # TODO temporary hack for getting period to work on my system
     'dquote': '\\\"',
     'equal': '=',
     'exclamation': '!',
@@ -192,6 +192,7 @@ _KEYCODE_TRANSLATION = {
     'slash': 44,
     'n': 45,
     'm': 46,
+    'dot': 47,  # TODO temporary hack for getting period to work on my system
     'period': 47,
     'tab': 48,
     'space': 49,
@@ -486,10 +487,15 @@ def write_text(text, paste=False):
     if text:
         script = applescript.AppleScript('''
         tell application "System Events"
-          repeat with i from 1 to count characters of "{text}"
-            keystroke (character i of "{text}")
-            delay 0.0002
-          end repeat
+            repeat with i from 1 to count characters of "{text}"
+                set keycode to (character i of "{text}")
+                if (keycode = ".") then
+                    key code 47
+                else
+                    keystroke keycode
+                end if
+                delay 0.0002
+            end repeat
         end tell
         '''.format(text=text))
         script.run()
